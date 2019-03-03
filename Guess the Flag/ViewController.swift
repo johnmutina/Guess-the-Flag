@@ -16,6 +16,8 @@ class ViewController: UIViewController {
     
     // initialize array that contains flags
     var countries = [String]()
+    // store the correct answer
+    var correctAnswer = 0
     // initialize score
     var score = 0
     
@@ -40,10 +42,16 @@ class ViewController: UIViewController {
     
     // when a new question is asked
     func askQuestion() {
+        // randomize the countries order in the array
+        countries.shuffle()
         // set every button image to an image coming from the countries array
         button1.setImage(UIImage(named: countries[0]), for: .normal)
         button2.setImage(UIImage(named: countries[1]), for: .normal)
         button3.setImage(UIImage(named: countries[2]), for: .normal)
+        // generate a random number from 0 to 2 inclusive and store it in a global variable
+        correctAnswer = Int.random(in: 0...2)
+        // set the title equal to the correct answer text
+        title = countries[correctAnswer].uppercased()
     }
 
 
