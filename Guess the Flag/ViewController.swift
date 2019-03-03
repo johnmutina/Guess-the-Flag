@@ -41,7 +41,7 @@ class ViewController: UIViewController {
     }
     
     // when a new question is asked
-    func askQuestion() {
+    func askQuestion(action: UIAlertAction! = nil) {
         // randomize the countries order in the array
         countries.shuffle()
         // set every button image to an image coming from the countries array
@@ -53,6 +53,33 @@ class ViewController: UIViewController {
         // set the title equal to the correct answer text
         title = countries[correctAnswer].uppercased()
     }
+    
+    // connect all buttons to this action (each button needs a different tag!)
+    @IBAction func buttonTapped(_ sender: UIButton) {
+        // create a variable to hold the result of the round
+        var title: String
+        // if the user taps the button with the tag equals to the correct answer
+        if sender.tag == correctAnswer {
+            // set the title as "Correct"
+            title = "Correct!"
+            // add one to the score
+            score += 1
+        // otherwise
+        } else {
+            // set title to Wrong
+            title = "Wrong!"
+            // decrease the score by one
+            score -= 1
+        }
+        
+        // create an alert controller that shows if the answer is correct or not and the score
+        let ac = UIAlertController(title: title, message: "Your score is \(score)", preferredStyle: .alert)
+        // add a button to the alert controller that lets the user continue the game
+        ac.addAction(UIAlertAction(title: "Continue", style: .default, handler: askQuestion))
+        // present the alert controller with an animation
+        present(ac, animated: true)
+    }
+    
 
 
 }
