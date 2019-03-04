@@ -13,6 +13,7 @@ class ViewController: UIViewController {
     @IBOutlet var button1: UIButton!
     @IBOutlet var button2: UIButton!
     @IBOutlet var button3: UIButton!
+    @IBOutlet var scoreLabel: UILabel!
     
     // initialize array that contains flags
     var countries = [String]()
@@ -72,8 +73,11 @@ class ViewController: UIViewController {
             score -= 1
         }
         
+        // update score label
+        scoreLabel.text = "Your score is \(score)"
+        
         // create an alert controller that shows if the answer is correct or not and the score
-        let ac = UIAlertController(title: title, message: "Your score is \(score)", preferredStyle: .alert)
+        let ac = UIAlertController(title: title, message: nil, preferredStyle: .alert)
         // add a button to the alert controller that lets the user continue the game
         ac.addAction(UIAlertAction(title: "Continue", style: .default, handler: askQuestion))
         // present the alert controller with an animation
